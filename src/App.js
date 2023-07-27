@@ -3,6 +3,7 @@ import "./index.css";
 import UserImage1 from "./aeests/images/user1.png";
 import UserImage2 from "./aeests/images/user2.png";
 import UserImage3 from "./aeests/images/user3.png";
+import PostListItem from "./components/PostListItem";
 function App() {
   const microBlogs = [
     {
@@ -51,8 +52,9 @@ function App() {
   function handleOnInput(e) {
     console.log("e.target.value:", e.target.value);
   }
-  function handleBlogClick(e, item) {
-    console.log(e, item);
+  function handleEdit(e, ...args){
+    e.preventDefault();
+    console.log('args', ...args)
   }
   return (
     <main className="container">
@@ -68,24 +70,24 @@ function App() {
       </div>
       <div className="postList">
         {microBlogs.map((microBlog) => (
-          <div
-            className="post"
-            key={microBlog.id}
-            onClick={(e) => handleBlogClick(e, microBlog)}
-          >
-            <img src={microBlog.author.avatar} width={50} alt="" />
-            <div className="postContainer">
-              <p className="postContent">{microBlog.content}</p>
-              <div className="postMeta">
-                <p className="postAuthor">{microBlog.author.name}</p>
-                <p className="postDate">{microBlog.publishDate}</p>
-              </div>
-            </div>
-          </div>
+          <PostListItem microBlog={microBlog} key={microBlog.id}>
+            <UpdateButton handleEdit={handleEdit}></UpdateButton>
+          </PostListItem>
         ))}
       </div>
     </main>
   );
 }
 
+function UpdateButton (props){
+  function handleChildEdit(e){
+    props.handleEdit(e,'传递参数1', 2)
+  }
+  return (
+    <>
+     <a href="http" className="button edit" onClick={handleChildEdit}>编辑</a>
+     <a href="http" className="button">删除</a>
+    </>
+  )
+}
 export default App;

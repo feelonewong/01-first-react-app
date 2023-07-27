@@ -40,3 +40,22 @@
 .postDate {
   color: #666666;
 }
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+  width: 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  text-decoration: none;
+}
+.edit {
+  background-color: #409eff !important;
+}
