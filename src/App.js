@@ -1,5 +1,6 @@
 import "./App.css";
 import "./index.css";
+import Count from './pages/03Status/index'
 import UserImage1 from "./aeests/images/user1.png";
 import UserImage2 from "./aeests/images/user2.png";
 import UserImage3 from "./aeests/images/user3.png";
@@ -58,6 +59,8 @@ function App() {
   }
   return (
     <main className="container">
+      <Count></Count>
+      <hr></hr>
       <h1 style={titleStyle}>欢迎使用本应用</h1>
       <div className="publishBlog">
         <textarea
