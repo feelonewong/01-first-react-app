@@ -1,34 +1,38 @@
 import { useState } from "react";
 
 function UserChange() {
-  const [username, setUsername] = useState("");
-  function handleNameChange(e) {
-    setUsername(e.target.value);
-  }
-  const [gender, setGender] = useState("");
-  function handleGenderChange(e) {
-    setGender(e.target.value);
-  }
-  const [occupation, setOccupation] = useState("");
-  function handleSelect(e) {
-    setOccupation(e.target.value);
-  }
-  const [hobby, setHobby] = useState([]);
-  function handleRunChange(e) {
-    const { checked, value } = e.target;
-    if (checked) {
-      setHobby([...hobby, value]);
-    } else {
-      let newHobby = hobby.filter((item) => item !== value);
-      setHobby([...newHobby]);
+  const [user, setUser] = useState({
+    username: "",
+    gender: "",
+    occupation: "",
+    hobby: [],
+  });
+
+  function handleInputChange(e) {
+    let { type, name, value, checked } = e.target;
+    if (type === "checkbox") {
+      if (checked) {
+        value = [...user.hobby, value];
+      } else {
+        value = user.hobby.filter((item) => item !== value);
+      }
     }
+    setUser({
+      ...user,
+      [name]: value,
+    });
   }
   return (
     <>
       <h1>第5章：用户注册</h1>
       <form>
         <label htmlFor="username">用户姓名:</label>
-        <input type="text" id="username" onChange={handleNameChange}></input>
+        <input
+          name="username"
+          type="text"
+          id="username"
+          onChange={handleInputChange}
+        ></input>
         <br />
         <label htmlFor="gender">性别:</label>
         <fieldset name="性别">
@@ -38,7 +42,7 @@ function UserChange() {
             type="radio"
             id="male"
             value="male"
-            onChange={handleGenderChange}
+            onChange={handleInputChange}
           />
           <label htmlFor="female">女</label>
           <input
@@ -46,11 +50,11 @@ function UserChange() {
             type="radio"
             id="female"
             value="female"
-            onChange={handleGenderChange}
+            onChange={handleInputChange}
           />
         </fieldset>
         <label htmlFor="occupation">职业</label>
-        <select id="occupation" onChange={handleSelect}>
+        <select id="occupation" name="occupation" onChange={handleInputChange}>
           <option value="">请选择...</option>
           <option value="前端">前端</option>
           <option value="后端">后端</option>
@@ -61,28 +65,28 @@ function UserChange() {
           name="hobby"
           type="checkbox"
           value="run"
-          onChange={handleRunChange}
+          onChange={handleInputChange}
         />
         跑步
         <input
           name="hobby"
           type="checkbox"
           value="sing"
-          onChange={handleRunChange}
+          onChange={handleInputChange}
         />
         唱歌
         <input
           name="hobby"
           type="checkbox"
           value="dance"
-          onChange={handleRunChange}
+          onChange={handleInputChange}
         />
         跳舞
       </form>
-      <p>用户姓名:{username}</p>
-      <p>用户性别:{gender}</p>
-      <p>职业:{occupation}</p>
-      <p>兴趣爱好:[{hobby.join(" , ")}]</p>
+      <p>用户姓名:{user.username}</p>
+      <p>用户性别:{user.gender}</p>
+      <p>职业:{user.occupation}</p>
+      <p>兴趣爱好:[{user.hobby.join(" , ")}]</p>
       <hr></hr>
     </>
   );
