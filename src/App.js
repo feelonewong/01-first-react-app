@@ -1,12 +1,14 @@
 import "./App.css";
 import "./index.css";
-import Count from './pages/03Status/index'
+import Count from "./pages/03Status/index";
 import UserImage1 from "./aeests/images/user1.png";
 import UserImage2 from "./aeests/images/user2.png";
 import UserImage3 from "./aeests/images/user3.png";
 import PostListItem from "./components/PostListItem";
+import UserChange from "./components/UserChange"
+import { useState } from "react";
 function App() {
-  const microBlogs = [
+  const [microBlogs, setMicroBlogs] = useState([
     {
       id: 1,
       author: {
@@ -44,32 +46,52 @@ function App() {
       content: "这是我的第4条微博",
       publishDate: "2023-01-02",
     },
-  ];
+  ]);
   const titleStyle = {
     fontSize: "20px",
     color: "red",
     fontWeight: "bold",
   };
+  const [microBlog, setMicroBlog] = useState("");
   function handleOnInput(e) {
-    console.log("e.target.value:", e.target.value);
+    setMicroBlog(e.target.value);
   }
-  function handleEdit(e, ...args){
+  function handlePublish() {
+    const newMicroBlog = {
+      id: microBlogs.length + 1,
+      author: {
+        name: "随机名称",
+        avatar: UserImage1,
+      },
+      content: microBlog,
+      publishDate: `${new Date().getFullYear()}-0${
+        new Date().getMonth() + 1
+      }-${new Date().getDay()}`,
+    };
+    setMicroBlogs([...microBlogs, newMicroBlog]);
+    setMicroBlog("");
+  }
+  function handleEdit(e, ...args) {
     e.preventDefault();
-    console.log('args', ...args)
+    console.log("args", ...args);
   }
   return (
     <main className="container">
+      {/* 第5章开始 */}
+      <UserChange></UserChange>
+      {/* 第5章结束 */}
       <Count></Count>
       <hr></hr>
       <h1 style={titleStyle}>欢迎使用本应用</h1>
       <div className="publishBlog">
         <textarea
           onInput={handleOnInput}
+          value={microBlog}
           cols={30}
           rows={5}
           placeholder="请输入..."
         ></textarea>
-        <button>发布</button>
+        <button onClick={handlePublish}>发布</button>
       </div>
       <div className="postList">
         {microBlogs.map((microBlog) => (
@@ -82,15 +104,19 @@ function App() {
   );
 }
 
-function UpdateButton (props){
-  function handleChildEdit(e){
-    props.handleEdit(e,'传递参数1', 2)
+function UpdateButton(props) {
+  function handleChildEdit(e) {
+    props.handleEdit(e, "传递参数1", 2);
   }
   return (
     <>
-     <a href="http" className="button edit" onClick={handleChildEdit}>编辑</a>
-     <a href="http" className="button">删除</a>
+      <a href="http" className="button edit" onClick={handleChildEdit}>
+        编辑
+      </a>
+      <a href="http" className="button">
+        删除
+      </a>
     </>
-  )
+  );
 }
 export default App;
