@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 function UserChange() {
-  const [user, setUser] = useState({
+  const initUser = {
     username: "",
     gender: "",
     occupation: "",
     hobby: [],
-  });
+  };
+  const [user, setUser] = useState(initUser);
 
   function handleInputChange(e) {
     let { type, name, value, checked } = e.target;
@@ -22,10 +23,17 @@ function UserChange() {
       [name]: value,
     });
   }
+  function handleReset() {
+    setUser(initUser);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(user);
+  }
   return (
     <>
       <h1>第5章：用户注册</h1>
-      <form>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
         <label htmlFor="username">用户姓名:</label>
         <input
           name="username"
@@ -82,6 +90,10 @@ function UserChange() {
           onChange={handleInputChange}
         />
         跳舞
+        <div>
+          <button type="submit">提交</button>
+          <button type="reset">重置</button>
+        </div>
       </form>
       <p>用户姓名:{user.username}</p>
       <p>用户性别:{user.gender}</p>

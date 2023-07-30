@@ -6,6 +6,7 @@ import UserImage2 from "./aeests/images/user2.png";
 import UserImage3 from "./aeests/images/user3.png";
 import PostListItem from "./components/PostListItem";
 import UserChange from "./components/UserChange"
+import Effect06 from './pages/06Effect/index'
 import { useState } from "react";
 function App() {
   const [microBlogs, setMicroBlogs] = useState([
@@ -77,6 +78,8 @@ function App() {
   }
   return (
     <main className="container">
+      {/* 第6章 开始 */}
+      <Effect06></Effect06>
       {/* 第5章开始 */}
       <UserChange></UserChange>
       {/* 第5章结束 */}
