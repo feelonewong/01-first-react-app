@@ -7,6 +7,8 @@ import UserImage3 from "./aeests/images/user3.png";
 import PostListItem from "./components/PostListItem";
 import UserChange from "./components/UserChange"
 import Effect06 from './pages/06Effect/index'
+import Fragement07 from './pages/07JSX/index'
+import Nav from './pages/07JSX/childItem'
 import { useState } from "react";
 function App() {
   const [microBlogs, setMicroBlogs] = useState([
@@ -78,6 +80,14 @@ function App() {
   }
   return (
     <main className="container">
+      {/* 第7章 开始 */}
+      <Fragement07></Fragement07>
+      <Nav>
+        <Nav.Item>首页</Nav.Item> <br/>
+        <Nav.Item>我的</Nav.Item> <br/>
+        <Nav.Item>关于</Nav.Item> <br/>
+      </Nav>
+      {/* 第7章 结束 */}
       {/* 第6章 开始 */}
       <Effect06></Effect06>
       {/* 第5章开始 */}
