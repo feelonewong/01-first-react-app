@@ -9,6 +9,9 @@ import UserChange from "./components/UserChange"
 import Effect06 from './pages/06Effect/index'
 import Fragement07 from './pages/07JSX/index'
 import Nav from './pages/07JSX/childItem'
+import ParentValue from './pages/08ParenetValue/index'
+import ParentJSXChild from './pages/08ParenetValue/nav'
+import CompValue from './pages/08ParenetValue/compValue'
 import { useState } from "react";
 function App() {
   const [microBlogs, setMicroBlogs] = useState([
@@ -50,6 +53,7 @@ function App() {
       publishDate: "2023-01-02",
     },
   ]);
+  const [text, setText] = useState('修改之前的值')
   const titleStyle = {
     fontSize: "20px",
     color: "red",
@@ -78,8 +82,16 @@ function App() {
     e.preventDefault();
     console.log("args", ...args);
   }
+  function handleChangeText(){
+    setText("修改以后得值")
+  }
   return (
     <main className="container">
+      {/* 第8章开始 */}
+      <CompValue></CompValue>
+      <ParentJSXChild></ParentJSXChild>
+      <ParentValue onInputChange={handleChangeText} text={text}></ParentValue>
+      {/* 第8章结束 */}
       {/* 第7章 开始 */}
       <Fragement07></Fragement07>
       <Nav>
