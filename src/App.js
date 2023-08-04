@@ -14,7 +14,9 @@ import ParentJSXChild from './pages/08ParenetValue/nav'
 import CompValue from './pages/08ParenetValue/compValue'
 import ReactStateSuper from "./pages/09ReactStateSuper";
 import UseEffectSuper from "./pages/10effectSuper";
+import LazyComp from './pages/11ReactComponentSuper/lazyComponent'
 import { useState } from "react";
+import ReactComponentSuper from "./pages/11ReactComponentSuper";
 function App() {
   const [microBlogs, setMicroBlogs] = useState([
     {
@@ -89,6 +91,11 @@ function App() {
   }
   return (
     <main className="container">
+      {/* 第11章开始 */}
+      <ReactComponentSuper></ReactComponentSuper>
+      <LazyComp></LazyComp>
+      {/* 第11章结束 */}
+      <hr></hr>
       {/* 第10章开始 */}
       <UseEffectSuper></UseEffectSuper>
       {/* 第10章结束 */}
