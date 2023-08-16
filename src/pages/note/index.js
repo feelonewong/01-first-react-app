@@ -28,14 +28,24 @@ function App() {
   useEffect(() => {
     getNotes();
   }, []);
-
+  async function onSubmit(e){
+    const res = await fetch('http://localhost:8080/notes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(e)
+    })
+    const data = await res.json()
+    setNotes([...notes, data])
+  }
   return (
     <main className="container">
       <div>
         <h1>我的笔记本</h1>
         <SearchNote searchTerm={searchTerm} handleChange={handleSearch} />
         {loading ? 'loading...':<NoteList notes={notes} />}
-        <AddNote />
+        <AddNote  onSubmit={onSubmit} />
       </div>
     </main>
   );
